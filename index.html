@@ -1178,9 +1178,21 @@ async function submitCheckout(e) {
 
   const data = await response.json();
 
-  snap.pay(data.token);
-
   const orderId = generateOrderId();
+
+snap.pay(data.token, {
+  onSuccess: function(result) {
+    window.location.href = "/success.html?order_id=" + orderId;
+  },
+
+  onPending: function(result) {
+    window.location.href = "/pending.html?order_id=" + orderId;
+  },
+
+  onError: function(result) {
+    alert("Pembayaran gagal");
+  }
+});
 
   const items = state.cart.map(c => {
     const p = findProduct(c.id);
