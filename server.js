@@ -32,12 +32,25 @@ app.post('/create-transaction', async (req, res) => {
       return res.status(400).json({ error: "Invalid total" });
     }
 
-    let parameter = {
-      transaction_details: {
-        order_id: 'ORDER-' + Date.now(),
-        gross_amount: Math.round(total)
-      }
-    };
+    let orderId = 'ORDER-' + Date.now();
+
+let parameter = {
+  transaction_details: {
+    order_id: orderId,
+    gross_amount: Math.round(total)
+  },
+
+  item_details: [
+    {
+      id: "item-1",
+      price: Math.round(total),
+      quantity: 1,
+      name: "Order Marketplace"
+    }
+  ],
+
+  finish_redirect_url: `https://wirastore.vercel.app//success.html?order_id=${orderId}`
+};
 
     const transaction = await snap.createTransaction(parameter);
 
