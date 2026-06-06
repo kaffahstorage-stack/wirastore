@@ -532,6 +532,8 @@
 }
 </style>
 </head>
+<script src="https://app.sandbox.midtrans.com/snap/snap.js"
+data-client-key="Mid-client-jqDXeIjvf3onvJmu"></script>
 <body>
 
 <!-- ==================== NAVIGATION ==================== -->
@@ -1128,7 +1130,7 @@ function validateField(id, predicate) {
   return valid;
 }
 
-function submitCheckout(e) {
+async function submitCheckout(e) {
   e.preventDefault();
   const name = $('#inpName').value.trim();
   const phone = $('#inpPhone').value.trim().replace(/\D/g,'');
@@ -1141,7 +1143,19 @@ function submitCheckout(e) {
     toast({ title:'Periksa form', message:'Beberapa data masih perlu dilengkapi.', type:'warn' });
     return;
   }
+const response = await fetch("/create-transaction", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    total: total
+  })
+});
 
+const data = await response.json();
+
+snap.pay(data.token);
   const orderId = generateOrderId();
   const items = state.cart.map(c => {
     const p = findProduct(c.id);
@@ -1274,6 +1288,7 @@ checkMobileSearch();
 // initFirebase(); // aktifkan setelah kredensial diisi
 
 console.log('%cWiraAudio Marketplace ready', 'color:#ff5a1f;font-weight:700;font-size:14px');
+
 </script>
 </body>
 </html>
