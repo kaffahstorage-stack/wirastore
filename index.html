@@ -1132,6 +1132,7 @@ function validateField(id, predicate) {
 
 async function submitCheckout(e) {
   e.preventDefault();
+
   const name = $('#inpName').value.trim();
   const phone = $('#inpPhone').value.trim().replace(/\D/g,'');
   const address = $('#inpAddress').value.trim();
@@ -1139,40 +1140,55 @@ async function submitCheckout(e) {
   const okName = validateField('#fName', () => name.length >= 2);
   const okPhone = validateField('#fPhone', () => phone.length >= 9 && phone.length <= 15);
   const okAddr = validateField('#fAddress', () => address.length >= 10);
+
   if (!okName || !okPhone || !okAddr) {
     toast({ title:'Periksa form', message:'Beberapa data masih perlu dilengkapi.', type:'warn' });
     return;
   }
-const response = await fetch("/create-transaction", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    total: total
-  })
-});
 
-const data = await response.json();
+  const total = cartSubtotal();
 
-snap.pay(data.token);
+  const response = await fetch("/create-transaction", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ total })
+  });
+
+  const data = await response.json();
+
+  snap.pay(data.token);
+
   const orderId = generateOrderId();
+
   const items = state.cart.map(c => {
     const p = findProduct(c.id);
-    return { id: p.id, name: p.name, category: p.category, price: p.price, qty: c.qty, subtotal: p.price * c.qty };
+    return {
+      id: p.id,
+      name: p.name,
+      category: p.category,
+      price: p.price,
+      qty: c.qty,
+      subtotal: p.price * c.qty
+    };
   });
-  const total = cartSubtotal();
+
   const order = {
-    orderId, name, phone, address,
-    items, total,
+    orderId,
+    name,
+    phone,
+    address,
+    items,
+    total,
     status: 'pending',
     createdAt: new Date().toISOString(),
   };
 
-  // Save to Firebase (placeholder)
+  // SIMPAN ORDER
   saveOrderToFirebase(order);
 
-  // Build WA message
+  // WA MESSAGE
   const lines = [
     `*Pesanan Baru — WiraAudio Marketplace*`,
     `Order ID: ${orderId}`,
@@ -1184,24 +1200,30 @@ snap.pay(data.token);
     ...items.map(i => `• ${i.name} × ${i.qty} = ${formatIDR(i.subtotal)}`),
     ``,
     `*Total: ${formatIDR(total)}*`,
-    `Mohon konfirmasi pengiriman. Terima kasih!`
   ];
+
   const waMsg = encodeURIComponent(lines.join('\n'));
   const waLink = `https://wa.me/6282337354131?text=${waMsg}`;
 
   $('#orderIdText').textContent = '#' + orderId;
   $('#waBtn').onclick = () => window.open(waLink, '_blank');
 
-  // Reset cart
+  // RESET CART
   state.cart = [];
   saveCart();
   updateCartUI();
+
   $('#checkoutForm').reset();
   closeModal('#checkoutModal');
   openModal('#successModal');
-  toast({ title:'Pesanan dikonfirmasi!', message:`Order ${orderId} berhasil dibuat.`, type:'success', duration:3500 });
-}
 
+  toast({
+    title:'Pesanan dikonfirmasi!',
+    message:`Order ${orderId} berhasil dibuat.`,
+    type:'success',
+    duration:3500
+  });
+}
 /* ==================== EVENT BINDINGS ==================== */
 document.addEventListener('click', (e) => {
   const addBtn = e.target.closest('[data-add]');
