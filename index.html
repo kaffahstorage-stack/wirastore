@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>WiraAudio Marketplace — Solusi Elektronik Terpercaya</title>
+<title>WiraStore Marketplace — Solusi Elektronik Terpercaya</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
@@ -541,7 +541,7 @@ data-client-key="Mid-client-jqDXeIjvf3onvJmu"></script>
   <div class="container nav-inner">
     <a href="#home" class="brand" data-testid="brand-logo">
       <div class="brand-mark">W</div>
-      <div class="brand-name">Wira<span>Audio</span></div>
+      <div class="brand-name">Wira<span>Store</span></div>
     </a>
     <div class="search" id="searchWrap">
       <i class="fa-solid fa-magnifying-glass"></i>
@@ -551,6 +551,7 @@ data-client-key="Mid-client-jqDXeIjvf3onvJmu"></script>
       <button class="icon-btn" id="mobileSearchBtn" data-testid="mobile-search-btn" aria-label="Search" style="display:none;">
         <i class="fa-solid fa-magnifying-glass"></i>
       </button>
+      
       <button class="icon-btn" id="cartBtn" data-testid="cart-btn" aria-label="Cart">
         <i class="fa-solid fa-bag-shopping"></i>
         <span class="cart-badge" id="cartBadge" data-testid="cart-badge">0</span>
@@ -566,7 +567,7 @@ data-client-key="Mid-client-jqDXeIjvf3onvJmu"></script>
       <div>
         <span class="eyebrow"><span class="dot"></span>Marketplace elektronik #1 di Indonesia</span>
         <h1>Solusi <em>elektronik</em> terpercaya untuk kerja & studio.</h1>
-        <p>Belanja PC, laptop, printer, dan sound system terbaik. Harga jujur, garansi resmi, dikirim cepat ke seluruh nusantara.</p>
+        <p>Belanja PC, laptop, printer, dan sound system terbaik. dan bergaransi resmi.</p>
         <div class="cta-row">
           <button class="btn btn-primary" id="shopNowBtn" data-testid="shop-now-btn">
             <i class="fa-solid fa-bolt"></i> Belanja Sekarang
@@ -622,6 +623,12 @@ data-client-key="Mid-client-jqDXeIjvf3onvJmu"></script>
         <span>Studio • Live • DJ Gear</span>
         <i class="fa-solid fa-arrow-up-right arrow"></i>
       </div>
+      <div class="cat" data-cat="CCTV" data-testid="cat-cctv">
+        <div class="cat-ico"><i class="fa-solid fa-camera"></i></div>
+        <h3>CCTV</h3>
+        <span>Indoor • Outdoor • Wireless</span>
+        <i class="fa-solid fa-arrow-up-right arrow"></i>
+      </div>
     </div>
   </div>
 </section>
@@ -641,6 +648,7 @@ data-client-key="Mid-client-jqDXeIjvf3onvJmu"></script>
       <button class="chip" data-filter="Laptop" data-testid="filter-laptop">Laptop</button>
       <button class="chip" data-filter="Printer" data-testid="filter-printer">Printer</button>
       <button class="chip" data-filter="Sound System" data-testid="filter-sound">Sound System</button>
+      <button class="chip" data-filter="CCTV" data-testid="filter-cctv">CCTV</button>
     </div>
     <div class="product-grid" id="productGrid" data-testid="product-grid"></div>
   </div>
@@ -651,7 +659,7 @@ data-client-key="Mid-client-jqDXeIjvf3onvJmu"></script>
   <div class="container">
     <div class="foot-grid">
       <div>
-        <div class="foot-brand">Wira<span>Audio</span></div>
+        <div class="foot-brand">Wira<span>Store</span></div>
         <p>Marketplace elektronik & audio terpercaya. Berdiri sejak 2012, melayani banyak studio, kantor, & creator di Indonesia.</p>
       </div>
       <div>
@@ -661,13 +669,7 @@ data-client-key="Mid-client-jqDXeIjvf3onvJmu"></script>
         <a href="#products">Printer</a>
         <a href="#products">Sound System</a>
       </div>
-      <div>
-        <h4>Bantuan</h4>
-        <a href="#">FAQ</a>
-        <a href="#">Cara Order</a>
-        <a href="#">Garansi</a>
-        <a href="#">Pengembalian</a>
-      </div>
+      
       <div>
         <h4>Kontak</h4>
         <p><i class="fa-brands fa-whatsapp"></i> +62 823-3735-4131</p>
@@ -676,7 +678,7 @@ data-client-key="Mid-client-jqDXeIjvf3onvJmu"></script>
       </div>
     </div>
     <div class="foot-bottom">
-      <div>© 2026 WiraAudio Marketplace. Semua hak dilindungi.</div>
+      <div>© 2026 WiraStore Marketplace. Semua hak dilindungi.</div>
       <div>Made with care in Banjarbaru.</div>
     </div>
   </div>
@@ -803,59 +805,73 @@ async function saveOrderToFirebase(order) {
 const PRODUCTS = [
   // ---- PC ----
   { id:'pc-01', name:'WiraPro Gaming Desktop X1', category:'PC', price:15999000, badge:'TERLARIS', rating:4.9, reviews:128,
-    img:'assets/products/pc-gaming-01.jpg',
+    img:'assets/pc/pc1.jpg',
     desc:'PC gaming bertenaga AMD Ryzen 7 + RTX 4070, RAM 32GB DDR5, SSD NVMe 1TB. Casing tempered glass dengan ARGB tuning yang elegan.',
     features:['AMD Ryzen 7 7700X','NVIDIA RTX 4070 12GB','32GB DDR5 RAM','SSD NVMe 1TB Gen4'] },
   { id:'pc-02', name:'WiraOffice Compact PC i5', category:'PC', price:6499000, rating:4.7, reviews:96,
-    img:'assets/products/pc-office-02.jpg',
+    img:'assets/pc/pc2.jpg',
     desc:'PC kantor mini hemat ruang dengan Intel Core i5 gen 13, ideal untuk produktivitas harian, video conference, & multitasking ringan.',
     features:['Intel Core i5-13400','16GB DDR4 RAM','SSD 512GB','Form-factor Mini-ITX'] },
   { id:'pc-03', name:'WiraCreator Workstation Pro', category:'PC', price:24999000, badge:'NEW', rating:5.0, reviews:42,
-    img:'assets/products/pc-creator-03.jpg',
+    img:'assets/pc/pc3.jpg',
     desc:'Workstation profesional untuk editor video & 3D artist. Intel Core i9 + RTX 4080, RAM 64GB ECC, dual SSD super cepat.',
     features:['Intel Core i9-14900K','NVIDIA RTX 4080 16GB','64GB DDR5 ECC','2× SSD NVMe 2TB'] },
 
   // ---- Laptop ----
   { id:'lp-01', name:'WiraBook Air 14', category:'Laptop', price:9499000, rating:4.8, reviews:201,
-    img:'assets/products/lp-air-14.jpg',
+    img:'assets/laptop/laptop 1.jpg',
     desc:'Ultrabook ringan 1.2 kg dengan layar 14" 2.8K OLED, baterai tahan 16 jam. Pilihan ideal untuk mobile worker & mahasiswa.',
     features:['Intel Core i5-1340P','16GB LPDDR5','SSD 512GB','Layar 14" 2.8K OLED 90Hz'] },
   { id:'lp-02', name:'WiraBook Pro 15 OLED', category:'Laptop', price:17999000, badge:'TERLARIS', rating:4.9, reviews:165,
-    img:'assets/products/lp-pro-15-oled.jpg',
+    img:'assets/laptop/laptop 2.jpg',
     desc:'Laptop creator dengan layar 15.6" OLED 3K 120Hz, color-accurate untuk fotografer & desainer. Performa bertenaga di chassis aluminium.',
     features:['Intel Core i7-13700H','32GB DDR5','SSD NVMe 1TB','Layar 15.6" 3K OLED 120Hz'] },
   { id:'lp-03', name:'WiraBook Gaming RTX', category:'Laptop', price:22499000, rating:4.8, reviews:88,
-    img:'assets/products/lp-gaming-rtx.jpg',
+    img:'assets/laptop/laptop 3.jpg',
     desc:'Laptop gaming 16" dengan RTX 4070 mobile, refresh 240Hz, sistem pendingin vapor-chamber. Bermain AAA tanpa kompromi.',
     features:['AMD Ryzen 9 7945HX','RTX 4070 8GB Mobile','32GB DDR5','Layar 16" QHD+ 240Hz'] },
 
   // ---- Printer ----
   { id:'pr-01', name:'WiraPrint LaserJet Pro', category:'Printer', price:3299000, rating:4.7, reviews:73,
-    img:'assets/products/pr-laserjet-pro.jpg',
+    img:'assets/printer/printer 1.jpg',
     desc:'Printer laser monokrom cepat untuk kantor — 30 ppm, duplex otomatis, koneksi Wi-Fi & AirPrint. Tahan banting untuk volume tinggi.',
     features:['30 halaman/menit','Duplex otomatis','Wi-Fi & AirPrint','Toner ekonomis 3000 lembar'] },
   { id:'pr-02', name:'WiraPrint InkColor X200', category:'Printer', price:1899000, rating:4.6, reviews:142,
-    img:'assets/products/pr-inkcolor-x200.jpg',
+    img:'assets/printer/printer 2.jpg',
     desc:'Printer inkjet warna ekonomis dengan tinta isi ulang. Cetak foto & dokumen jernih, scan & copy dalam satu unit.',
     features:['Inkjet warna 4-tinta','Print, scan, copy','Refillable ink tank','Cetak hingga 7500 lembar/refill'] },
   { id:'pr-03', name:'WiraPrint AllInOne 3D', category:'Printer', price:8799000, badge:'NEW', rating:4.8, reviews:31,
-    img:'assets/products/pr-allinone-3d.jpg',
+    img:'assets/printer/printer 3.jpg',
     desc:'Printer 3D FDM dengan area kerja 256×256×256mm, auto-leveling, dan kecepatan cetak hingga 500 mm/s. Cocok untuk maker & prototype.',
     features:['Area 256×256×256mm','Kecepatan 500 mm/s','Auto bed-leveling','Multi-filament: PLA/PETG/ABS'] },
 
   // ---- Sound System ----
   { id:'ss-01', name:'WiraSound Studio Monitor M5', category:'Sound System', price:4299000, badge:'TERLARIS', rating:4.9, reviews:184,
-    img:'assets/products/ss-studio-monitor-m5.jpg',
+    img:'assets/sound system/speaker 1.jpg',
     desc:'Monitor studio aktif 5" — respons frekuensi flat, ideal untuk mixing & mastering. Tweeter silk dome, woofer kevlar.',
     features:['Driver 5" kevlar + 1" silk tweeter','50W bi-amp Class-D','Respon 45Hz–22kHz','Input XLR/TRS/RCA'] },
   { id:'ss-02', name:'WiraSound Tower Floor 7.1', category:'Sound System', price:12999000, rating:4.8, reviews:67,
-    img:'assets/products/ss-tower-floor-71.jpg',
+    img:'assets/sound system/speaker 2.jpg',
     desc:'Sistem home theater 7.1 dengan tower speaker, center channel, surround & subwoofer 10". Pengalaman bioskop di rumah.',
     features:['Konfigurasi 7.1 lengkap','Subwoofer aktif 10" 200W','Dolby Atmos Ready','Receiver HDMI 4K HDR'] },
   { id:'ss-03', name:'WiraSound DJ Mixer Pro', category:'Sound System', price:6799000, rating:4.7, reviews:54,
-    img:'assets/products/ss-dj-mixer-pro.jpg',
+    img:'assets/sound system/speaker 3.jpg',
     desc:'Mixer DJ 4-channel dengan efek built-in, jog wheel sensitif, dan kompatibel langsung dengan Serato & Rekordbox.',
     features:['4 channel + 2 mic','Jog wheel HD','16 efek FX built-in','Serato & Rekordbox ready'] },
+    // ---- CCTV ----
+  { id:'cctv-01', name:'WiraCCTV Indoor HD', category:'CCTV', price:1999000, badge:'TERLARIS', rating:4.8, reviews:89,
+    img:'assets/cctv/cctv 1.jpg',
+    desc:'Kamera CCTV indoor HD 1080p dengan fitur night vision dan streaming ke aplikasi mobile.',
+    features:['Resolusi 1080p','Night Vision','Streaming ke Mobile','Waterproof'] },
+  { id:'cctv-02', name:'WiraCCTV Outdoor IP67', category:'CCTV', price:2499000, rating:4.7, reviews:64,
+    img:'assets/cctv/cctv 2.jpg',
+    desc:'Kamera CCTV outdoor IP67 dengan resolusi 1080p, night vision, dan fitur anti-air. Cocok untuk pengawasan luar ruangan.',
+    features:['Resolusi 1080p','Night Vision','IP67 Rating','Anti-Air'] },
+  { id:'cctv-03', name:'WiraCCTV Wireless PTZ', category:'CCTV', price:3999000, badge:'NEW', rating:4.9, reviews:38,
+    img:'assets/cctv/cctv 3.jpg',
+    desc:'Kamera CCTV wireless dengan fitur pan-tilt-zoom (PTZ) dan streaming ke aplikasi mobile. Cocok untuk pengawasan area luas.',
+    features:['Wireless Connectivity','PTZ Control','Streaming ke Mobile','Motion Detection'] },
+
 ];
 
 /* ==================== STATE ==================== */
@@ -906,7 +922,11 @@ function renderProducts() {
   const filtered = PRODUCTS.filter(p => {
     const matchCat = state.filter === 'all' || p.category === state.filter;
     const q = state.search.trim().toLowerCase();
-    const matchSearch = !q || p.name.toLowerCase().includes(q) || p.category.toLowerCase().includes(q);
+    const matchSearch =
+  !q ||
+  p.name.toLowerCase().includes(q) ||
+  p.category.toLowerCase().includes(q) ||
+  p.desc.toLowerCase().includes(q);
     return matchCat && matchSearch;
   });
 
@@ -1190,7 +1210,7 @@ async function submitCheckout(e) {
 
   // WA MESSAGE
   const lines = [
-    `*Pesanan Baru — WiraAudio Marketplace*`,
+    `*Pesanan Baru — WiraStore Marketplace*`,
     `Order ID: ${orderId}`,
     `Nama: ${name}`,
     `WA: ${phone}`,
@@ -1263,6 +1283,20 @@ $('#searchInput').addEventListener('input', (e) => {
   state.search = e.target.value;
   renderProducts();
 });
+$('#searchInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+
+    state.search = e.target.value;
+    renderProducts();
+
+    // scroll ke produk
+    document.getElementById('products').scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  }
+});
 
 $('#cartBtn').addEventListener('click', openDrawer);
 $('#closeCart').addEventListener('click', closeDrawer);
@@ -1309,8 +1343,24 @@ updateCartUI();
 checkMobileSearch();
 // initFirebase(); // aktifkan setelah kredensial diisi
 
-console.log('%cWiraAudio Marketplace ready', 'color:#ff5a1f;font-weight:700;font-size:14px');
+console.log('%cWiraStore Marketplace ready', 'color:#ff5a1f;font-weight:700;font-size:14px');
+function runSearch() {
+  state.search = $('#searchInput').value;
+  renderProducts();
 
+  document.getElementById('products').scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+}
+let searchTimer;
+
+$('#searchInput').addEventListener('input', (e) => {
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(() => {
+    runSearch();
+  }, 400);
+});
 </script>
 </body>
 </html>
