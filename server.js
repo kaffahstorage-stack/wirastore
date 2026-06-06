@@ -21,29 +21,32 @@ app.listen(3000, () => {
   console.log('Server jalan di http://localhost:3000');
 });
 app.post('/create-transaction', async (req, res) => {
+  try {
+    const total = Number(req.body.total);
 
-    const { total } = req.body;
+    console.log("RAW BODY:", req.body);
+    console.log("TOTAL TYPE:", typeof req.body.total);
+    console.log("TOTAL PARSED:", total);
 
-    try {
-
-        let parameter = {
-            transaction_details: {
-                order_id: 'ORDER-' + Date.now(),
-                gross_amount: total
-            }
-        };
-
-        const transaction = await snap.createTransaction(parameter);
-
-        res.json({
-            token: transaction.token
-        });
-
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({
-            error: err.message
-        });
+    if (!total || isNaN(total)) {
+      return res.status(400).json({ error: "Invalid total" });
     }
 
+    let parameter = {
+      transaction_details: {
+        order_id: 'ORDER-' + Date.now(),
+        gross_amount: Math.round(total)
+      }
+    };
+
+    const transaction = await snap.createTransaction(parameter);
+
+    return res.json({
+      token: transaction.token
+    });
+
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({ error: err.message });
+  }
 });
