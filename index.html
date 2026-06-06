@@ -1173,7 +1173,12 @@ async function submitCheckout(e) {
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify({ total })
+   body: JSON.stringify({
+  total,
+  name,
+  phone,
+  address
+})
   });
 
   const data = await response.json();
