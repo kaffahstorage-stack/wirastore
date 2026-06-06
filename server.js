@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const db = require('./firebase');
 
 const app = express();
 
@@ -17,12 +18,21 @@ let snap = new midtransClient.Snap({
     isProduction: false,
     serverKey: 'Mid-server-Sh2Gb0Myp4rvUpa4XPqtl2XE'
 });
+async function saveOrder(order) {
+  const ref = db.ref('orders');
+  await ref.push(order);
+  console.log('Order berhasil disimpan ke Firebase');
+}
 app.listen(3000, () => {
   console.log('Server jalan di http://localhost:3000');
 });
 app.post('/create-transaction', async (req, res) => {
   try {
     const total = Number(req.body.total);
+
+    const name = req.body.name;
+    const phone = req.body.phone;
+    const address = req.body.address;
 
     console.log("RAW BODY:", req.body);
     console.log("TOTAL TYPE:", typeof req.body.total);
@@ -33,7 +43,15 @@ app.post('/create-transaction', async (req, res) => {
     }
 
     let orderId = 'ORDER-' + Date.now();
-
+await saveOrder({
+  orderId: orderId,
+  total: Math.round(total),
+  name: name,
+  phone: phone,
+  address: address,
+  status: 'pending',
+  createdAt: Date.now()
+});
 let parameter = {
   transaction_details: {
     order_id: orderId,
@@ -49,7 +67,7 @@ let parameter = {
     }
   ],
 
-  finish_redirect_url: `https://wirastore.vercel.app//success.html?order_id=${orderId}`
+  finish_redirect_url: `https://wirastore.vercel.app/success.html?order_id=${orderId}`
 };
 
     const transaction = await snap.createTransaction(parameter);
