@@ -81,6 +81,4 @@ let parameter = {
     return res.status(500).json({ error: err.message });
   }
 });
-app.get('/test', (req, res) => {
-  res.send('SERVER HIDUP');
-});
+console.log("FIREBASE OK");
